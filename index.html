@@ -1,97 +1,567 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#174a7e">
   <title>글쓰기 활동 안내</title>
   <style>
-    :root{--navy:#174a7e;--blue:#2878bd;--sky:#eaf5ff;--line:#d6e3ee;--text:#17212b;--muted:#617181;--green:#16815c;--red:#c43e3e;--lock:#eef1f4}
-    *{box-sizing:border-box} body{margin:0;background:#f5f8fb;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;line-height:1.6}
-    button,input,textarea,select{font:inherit} button{min-height:48px;cursor:pointer}
-    .top{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;padding:28px 20px 24px}
-    .wrap{width:min(720px,100%);margin:auto}.eyebrow{font-size:.82rem;font-weight:800;opacity:.85;letter-spacing:.08em}.top h1{font-size:1.65rem;line-height:1.3;margin:8px 0}.top p{margin:0;opacity:.93}
-    main{padding:18px 14px 44px}.notice,.card,.panel{background:white;border:1px solid var(--line);border-radius:18px;box-shadow:0 5px 18px rgba(33,62,85,.07)}
-    .notice{padding:15px 17px;margin-bottom:16px}.notice strong{color:var(--navy)}
-    .menu{display:grid;gap:13px}.card{padding:17px}.row{display:flex;gap:12px;align-items:flex-start}.num{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--sky);color:var(--navy);font-weight:900}.card h2{font-size:1.05rem;margin:1px 0 4px}.card p{font-size:.92rem;color:var(--muted);margin:0 0 12px}.badge{display:inline-flex;border-radius:999px;padding:3px 9px;font-size:.76rem;font-weight:800;margin-bottom:7px}.open{background:#dcf5e9;color:#116647}.locked{background:var(--lock);color:#69737d}
-    .action{width:100%;border:0;border-radius:12px;background:var(--navy);color:white;font-weight:800;padding:11px 15px}.action.secondary{background:#edf5fc;color:var(--navy);border:1px solid #bdd5e8}.action:disabled{background:#e6eaee;color:#8a949d;cursor:not-allowed}
-    .view{display:none}.view.active{display:block}.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}.back{border:1px solid var(--line);border-radius:11px;background:white;color:var(--navy);padding:7px 12px}.progress{height:9px;background:#e8edf2;border-radius:99px;overflow:hidden;margin:12px 0 20px}.bar{height:100%;background:var(--blue);width:0;transition:.25s}
-    .panel{padding:20px}.panel h2{font-size:1.28rem;margin:0 0 8px}.help{color:var(--muted);font-size:.92rem}.question{margin:20px 0;padding-top:18px;border-top:1px solid var(--line)}.question:first-of-type{border-top:0;padding-top:0}.question h3{font-size:1rem;margin:0 0 10px}.passage{background:#f7fafc;border-left:4px solid #8db9dc;padding:13px 14px;border-radius:8px;margin:10px 0}.choice{display:block;border:1px solid var(--line);padding:12px;border-radius:11px;margin:8px 0;background:white}.choice input{margin-right:8px;transform:scale(1.2)}
-    textarea{width:100%;min-height:190px;border:1px solid #aebfcd;border-radius:12px;padding:14px;resize:vertical;font-size:16px;line-height:1.7}.counter{text-align:right;color:var(--muted);font-size:.85rem}.feedback{display:none;margin-top:12px;padding:12px;border-radius:10px}.feedback.show{display:block}.feedback.good{background:#e6f7ef;color:#126443}.feedback.bad{background:#fff0ec;color:#9b342c}
-    .checklist{display:grid;gap:8px;margin:14px 0}.checklist label{background:#f7fafc;padding:10px;border-radius:9px}.nav{display:flex;gap:10px;margin-top:18px}.nav button{flex:1}.footer{text-align:center;color:#798692;font-size:.78rem;padding:24px 10px}.sr{position:absolute;left:-9999px}
-    @media(max-width:420px){.top h1{font-size:1.42rem}.panel{padding:16px}.nav{flex-direction:column}.nav button{width:100%}}
+    :root {
+      --navy: #174a7e;
+      --blue: #2878bd;
+      --sky: #eaf5ff;
+      --line: #d6e3ee;
+      --text: #17212b;
+      --muted: #617181;
+      --green: #16815c;
+      --red: #c43e3e;
+      --lock: #eef1f4
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: #f5f8fb;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      line-height: 1.6
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit
+    }
+
+    button {
+      min-height: 48px;
+      cursor: pointer
+    }
+
+    .top {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: white;
+      padding: 28px 20px 24px
+    }
+
+    .wrap {
+      width: min(720px, 100%);
+      margin: auto
+    }
+
+    .eyebrow {
+      font-size: .82rem;
+      font-weight: 800;
+      opacity: .85;
+      letter-spacing: .08em
+    }
+
+    .top h1 {
+      font-size: 1.65rem;
+      line-height: 1.3;
+      margin: 8px 0
+    }
+
+    .top p {
+      margin: 0;
+      opacity: .93
+    }
+
+    main {
+      padding: 18px 14px 44px
+    }
+
+    .notice,
+    .card,
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(33, 62, 85, .07)
+    }
+
+    .notice {
+      padding: 15px 17px;
+      margin-bottom: 16px
+    }
+
+    .notice strong {
+      color: var(--navy)
+    }
+
+    .menu {
+      display: grid;
+      gap: 13px
+    }
+
+    .card {
+      padding: 17px
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--sky);
+      color: var(--navy);
+      font-weight: 900
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      margin: 1px 0 4px
+    }
+
+    .card p {
+      font-size: .92rem;
+      color: var(--muted);
+      margin: 0 0 12px
+    }
+
+    .badge {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: .76rem;
+      font-weight: 800;
+      margin-bottom: 7px
+    }
+
+    .open {
+      background: #dcf5e9;
+      color: #116647
+    }
+
+    .locked {
+      background: var(--lock);
+      color: #69737d
+    }
+
+    .action {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      background: var(--navy);
+      color: white;
+      font-weight: 800;
+      padding: 11px 15px
+    }
+
+    .action.secondary {
+      background: #edf5fc;
+      color: var(--navy);
+      border: 1px solid #bdd5e8
+    }
+
+    .action:disabled {
+      background: #e6eaee;
+      color: #8a949d;
+      cursor: not-allowed
+    }
+
+    .view {
+      display: none
+    }
+
+    .view.active {
+      display: block
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px
+    }
+
+    .back {
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: white;
+      color: var(--navy);
+      padding: 7px 12px
+    }
+
+    .progress {
+      height: 9px;
+      background: #e8edf2;
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 12px 0 20px
+    }
+
+    .bar {
+      height: 100%;
+      background: var(--blue);
+      width: 0;
+      transition: .25s
+    }
+
+    .panel {
+      padding: 20px
+    }
+
+    .panel h2 {
+      font-size: 1.28rem;
+      margin: 0 0 8px
+    }
+
+    .help {
+      color: var(--muted);
+      font-size: .92rem
+    }
+
+    .question {
+      margin: 20px 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line)
+    }
+
+    .question:first-of-type {
+      border-top: 0;
+      padding-top: 0
+    }
+
+    .question h3 {
+      font-size: 1rem;
+      margin: 0 0 10px
+    }
+
+    .passage {
+      background: #f7fafc;
+      border-left: 4px solid #8db9dc;
+      padding: 13px 14px;
+      border-radius: 8px;
+      margin: 10px 0
+    }
+
+    .choice {
+      display: block;
+      border: 1px solid var(--line);
+      padding: 12px;
+      border-radius: 11px;
+      margin: 8px 0;
+      background: white
+    }
+
+    .choice input {
+      margin-right: 8px;
+      transform: scale(1.2)
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 190px;
+      border: 1px solid #aebfcd;
+      border-radius: 12px;
+      padding: 14px;
+      resize: vertical;
+      font-size: 16px;
+      line-height: 1.7
+    }
+
+    .counter {
+      text-align: right;
+      color: var(--muted);
+      font-size: .85rem
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px
+    }
+
+    .feedback.show {
+      display: block
+    }
+
+    .feedback.good {
+      background: #e6f7ef;
+      color: #126443
+    }
+
+    .feedback.bad {
+      background: #fff0ec;
+      color: #9b342c
+    }
+
+    .checklist {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0
+    }
+
+    .checklist label {
+      background: #f7fafc;
+      padding: 10px;
+      border-radius: 9px
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px
+    }
+
+    .nav button {
+      flex: 1
+    }
+
+    .footer {
+      text-align: center;
+      color: #798692;
+      font-size: .78rem;
+      padding: 24px 10px
+    }
+
+    .sr {
+      position: absolute;
+      left: -9999px
+    }
+
+    .model {
+      margin-top: 20px;
+      padding: 17px;
+      background: #f1f8ff;
+      border: 1px solid #b8d8f1;
+      border-radius: 12px
+    }
+
+    .model[hidden] {
+      display: none
+    }
+
+    .model h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem
+    }
+
+    .model ol {
+      padding-left: 22px;
+      margin: 10px 0
+    }
+
+    .model li {
+      margin: 8px 0
+    }
+
+    .model .passage {
+      background: white
+    }
+
+    .model .help {
+      margin-bottom: 0
+    }
+
+    textarea[readonly] {
+      background: #f4f7fa
+    }
+
+    @media(max-width:420px) {
+      .top h1 {
+        font-size: 1.42rem
+      }
+
+      .panel {
+        padding: 16px
+      }
+
+      .nav {
+        flex-direction: column
+      }
+
+      .nav button {
+        width: 100%
+      }
+    }
   </style>
 </head>
+
 <body>
-  <header class="top"><div class="wrap"><div class="eyebrow">대학생 글쓰기 연구</div><h1>글쓰기 활동 안내</h1><p>안내된 순서에 따라 모바일에서 활동해 주세요.</p></div></header>
+  <header class="top">
+    <div class="wrap">
+      <div class="eyebrow">대학생 글쓰기 연구</div>
+      <h1>글쓰기 활동 안내</h1>
+      <p>안내된 순서에 따라 모바일에서 활동해 주세요.</p>
+    </div>
+  </header>
   <main class="wrap">
     <section id="home" class="view active">
       <div class="notice"><strong>내일 공개 범위</strong><br>사전 설문과 테스트 활동만 이용할 수 있습니다. 테스트 활동의 답변은 연구 분석자료로 저장되지 않습니다.</div>
       <div class="menu">
-        <article class="card"><span class="badge open">이용 가능</span><div class="row"><div class="num">1</div><div><h2>활동 수행 전 설문</h2><p>연구 참여 동의와 글쓰기 경험·인식 설문입니다.</p></div></div><button class="action" id="surveyBtn">사전 설문 시작</button></article>
-        <article class="card"><span class="badge open">이용 가능</span><div class="row"><div class="num">2</div><div><h2>테스트 활동</h2><p>문단 구성 문제와 이어쓰기 문제를 미리 경험합니다. 약 10∼15분이 걸립니다.</p></div></div><button class="action" onclick="startPractice()">테스트 활동 시작</button></article>
-        <article class="card"><span class="badge locked">준비 중</span><div class="row"><div class="num">3</div><div><h2>본 활동 1: 문단 구성</h2><p>수업 시간에 공개됩니다.</p></div></div><button class="action" disabled>현재 이용할 수 없습니다</button></article>
-        <article class="card"><span class="badge locked">준비 중</span><div class="row"><div class="num">4</div><div><h2>본 활동 2: 서평 이어쓰기</h2><p>수업 시간에 공개됩니다.</p></div></div><button class="action" disabled>현재 이용할 수 없습니다</button></article>
-        <article class="card"><span class="badge locked">준비 중</span><div class="row"><div class="num">5</div><div><h2>최종 글쓰기 활동</h2><p>앞선 활동을 완료한 뒤 공개됩니다.</p></div></div><button class="action" disabled>현재 이용할 수 없습니다</button></article>
-        <article class="card"><span class="badge locked">준비 중</span><div class="row"><div class="num">6</div><div><h2>활동 수행 후 설문</h2><p>전체 활동 종료 후 공개됩니다.</p></div></div><button class="action" disabled>현재 이용할 수 없습니다</button></article>
+        <article class="card"><span class="badge open">이용 가능</span>
+          <div class="row">
+            <div class="num">1</div>
+            <div>
+              <h2>활동 수행 전 설문</h2>
+              <p>연구 참여 동의와 글쓰기 경험·인식 설문입니다.</p>
+            </div>
+          </div><button class="action" id="surveyBtn">사전 설문 시작</button>
+        </article>
+        <article class="card"><span class="badge open">이용 가능</span>
+          <div class="row">
+            <div class="num">2</div>
+            <div>
+              <h2>테스트 활동</h2>
+              <p>문단 구성 문제와 이어쓰기 문제를 미리 경험합니다. 약 10∼15분이 걸립니다.</p>
+            </div>
+          </div><button class="action" onclick="startPractice()">테스트 활동 시작</button>
+        </article>
+        <article class="card"><span class="badge locked">준비 중</span>
+          <div class="row">
+            <div class="num">3</div>
+            <div>
+              <h2>본 활동 1: 문단 구성</h2>
+              <p>수업 시간에 공개됩니다.</p>
+            </div>
+          </div><button class="action" disabled>현재 이용할 수 없습니다</button>
+        </article>
+        <article class="card"><span class="badge locked">준비 중</span>
+          <div class="row">
+            <div class="num">4</div>
+            <div>
+              <h2>본 활동 2: 서평 이어쓰기</h2>
+              <p>수업 시간에 공개됩니다.</p>
+            </div>
+          </div><button class="action" disabled>현재 이용할 수 없습니다</button>
+        </article>
+        <article class="card"><span class="badge locked">준비 중</span>
+          <div class="row">
+            <div class="num">5</div>
+            <div>
+              <h2>최종 글쓰기 활동</h2>
+              <p>앞선 활동을 완료한 뒤 공개됩니다.</p>
+            </div>
+          </div><button class="action" disabled>현재 이용할 수 없습니다</button>
+        </article>
+        <article class="card"><span class="badge locked">준비 중</span>
+          <div class="row">
+            <div class="num">6</div>
+            <div>
+              <h2>활동 수행 후 설문</h2>
+              <p>전체 활동 종료 후 공개됩니다.</p>
+            </div>
+          </div><button class="action" disabled>현재 이용할 수 없습니다</button>
+        </article>
       </div>
     </section>
 
     <section id="practice1" class="view">
       <div class="toolbar"><button class="back" onclick="goHome()">← 처음으로</button><strong>테스트 1/2</strong></div>
-      <div class="progress"><div class="bar" style="width:50%"></div></div>
+      <div class="progress">
+        <div class="bar" style="width:50%"></div>
+      </div>
       <div class="panel">
-        <h2>유형 1. 문단 구성</h2><p class="help">각 단락은 하나의 중심 내용을 가져야 하며, 문장들은 그 중심 내용을 뒷받침해야 합니다.</p>
+        <h2>유형 1. 문단 구성</h2>
+        <p class="help">각 단락은 하나의 중심 내용을 가져야 하며, 문장들은 그 중심 내용을 뒷받침해야 합니다.</p>
         <div class="question">
           <h3>1. 다음 단락의 주제문으로 가장 적절한 문장을 고르세요.</h3>
-          <div class="passage">서평은 작품의 줄거리를 요약하는 데서 끝나지 않는다. 독자는 작품의 특징을 분석하고 그 의미와 가치를 판단해야 한다. 작품 속 구체적인 장면이나 표현은 이러한 판단을 뒷받침하는 근거가 된다.</div>
+          <div class="passage">서평은 작품의 줄거리를 요약하는 데서 끝나지 않는다. 독자는 작품의 특징을 분석하고 그 의미와 가치를 판단해야 한다. 작품 속 구체적인 장면이나 표현은 이러한
+            판단을 뒷받침하는 근거가 된다.</div>
           <label class="choice"><input type="radio" name="q1" value="1">① 서평에는 작품의 줄거리가 들어갈 수 있다.</label>
-          <label class="choice"><input type="radio" name="q1" value="2">② 서평은 작품에 대한 판단과 그 판단을 뒷받침하는 근거를 갖추어야 한다.</label>
+          <label class="choice"><input type="radio" name="q1" value="2">② 서평은 작품에 대한 판단과 그 판단을 뒷받침하는 근거를 갖추어야
+            한다.</label>
           <label class="choice"><input type="radio" name="q1" value="3">③ 독자는 여러 종류의 책을 읽는다.</label>
           <label class="choice"><input type="radio" name="q1" value="4">④ 작품에는 다양한 장면과 표현이 등장한다.</label>
         </div>
         <div class="question">
           <h3>2. 다음 단락에서 중심 내용과 가장 관련이 적은 문장을 고르세요.</h3>
-          <div class="passage">① 서평에서 작품의 장면을 제시할 때에는 그 장면을 선택한 이유를 밝혀야 한다. ② 해당 장면이 인물이나 주제를 어떻게 보여 주는지 설명하면 글의 설득력이 높아진다. ③ 최근에는 종이책뿐 아니라 전자책으로도 작품을 읽을 수 있다. ④ 따라서 장면의 소개 뒤에는 그 의미에 대한 해석이 이어져야 한다.</div>
-          <label class="choice"><input type="radio" name="q2" value="1">①</label><label class="choice"><input type="radio" name="q2" value="2">②</label><label class="choice"><input type="radio" name="q2" value="3">③</label><label class="choice"><input type="radio" name="q2" value="4">④</label>
+          <div class="passage">① 서평에서 작품의 장면을 제시할 때에는 그 장면을 선택한 이유를 밝혀야 한다. ② 해당 장면이 인물이나 주제를 어떻게 보여 주는지 설명하면 글의 설득력이
+            높아진다. ③ 최근에는 종이책뿐 아니라 전자책으로도 작품을 읽을 수 있다. ④ 따라서 장면의 소개 뒤에는 그 의미에 대한 해석이 이어져야 한다.</div>
+          <label class="choice"><input type="radio" name="q2" value="1">①</label><label class="choice"><input
+              type="radio" name="q2" value="2">②</label><label class="choice"><input type="radio" name="q2"
+              value="3">③</label><label class="choice"><input type="radio" name="q2" value="4">④</label>
         </div>
         <div class="question">
           <h3>3. 다음 문장을 자연스러운 단락 순서로 배열하세요.</h3>
-          <div class="passage">가. 이처럼 구체적인 근거는 작품에 대한 평가를 설득력 있게 만든다.<br>나. 서평의 평가는 작품 속 근거를 바탕으로 제시되어야 한다.<br>다. 예를 들어 인물의 선택을 비판하려면, 그 선택이 드러나는 장면을 먼저 제시해야 한다.<br>라. 그런 다음 그 장면이 인물의 성격이나 작품의 주제와 어떻게 연결되는지 해석해야 한다.</div>
-          <select id="q3" class="choice" aria-label="문장 순서"><option value="">순서를 선택하세요</option><option value="나-다-라-가">나 → 다 → 라 → 가</option><option value="다-나-가-라">다 → 나 → 가 → 라</option><option value="나-라-다-가">나 → 라 → 다 → 가</option><option value="가-나-다-라">가 → 나 → 다 → 라</option></select>
+          <div class="passage">가. 이처럼 구체적인 근거는 작품에 대한 평가를 설득력 있게 만든다.<br>나. 서평의 평가는 작품 속 근거를 바탕으로 제시되어야 한다.<br>다. 예를 들어
+            인물의 선택을 비판하려면, 그 선택이 드러나는 장면을 먼저 제시해야 한다.<br>라. 그런 다음 그 장면이 인물의 성격이나 작품의 주제와 어떻게 연결되는지 해석해야 한다.</div>
+          <select id="q3" class="choice" aria-label="문장 순서">
+            <option value="">순서를 선택하세요</option>
+            <option value="나-다-라-가">나 → 다 → 라 → 가</option>
+            <option value="다-나-가-라">다 → 나 → 가 → 라</option>
+            <option value="나-라-다-가">나 → 라 → 다 → 가</option>
+            <option value="가-나-다-라">가 → 나 → 다 → 라</option>
+          </select>
         </div>
         <button class="action" onclick="checkParagraph()">정답 확인</button>
         <div id="pFeedback" class="feedback" aria-live="polite"></div>
-        <div class="nav"><button class="action secondary" onclick="goHome()">메뉴로</button><button class="action" id="toWriting" onclick="showView('practice2')" disabled>이어쓰기 문제로</button></div>
+        <div class="nav"><button class="action secondary" onclick="goHome()">메뉴로</button><button class="action"
+            id="toWriting" onclick="showView('practice2')" disabled>이어쓰기 문제로</button></div>
       </div>
     </section>
 
     <section id="practice2" class="view">
-      <div class="toolbar"><button class="back" onclick="showView('practice1')">← 이전</button><strong>테스트 2/2</strong></div>
-      <div class="progress"><div class="bar" style="width:100%"></div></div>
+      <div class="toolbar"><button class="back" onclick="showView('practice1')">← 이전</button><strong>테스트 2/2</strong>
+      </div>
+      <div class="progress">
+        <div class="bar" style="width:100%"></div>
+      </div>
       <div class="panel">
         <h2>유형 2. 서평 이어쓰기</h2>
         <p class="help">앞 단락의 중심 내용을 파악하고, 그다음에 올 하나의 본론 단락을 작성하세요. 이 문제는 형식을 익히기 위한 연습이며 저장되지 않습니다.</p>
-        <div class="passage"><strong>앞 단락</strong><br>좋은 서평은 작품의 내용을 소개하는 데 그치지 않고, 작품이 독자에게 던지는 문제를 구체적으로 해석한다. 이를 위해서는 작품 속 인물의 행동이나 특정 장면을 근거로 선택하고, 그 근거가 자신의 평가와 어떻게 연결되는지를 설명해야 한다.</div>
-        <p><strong>과제:</strong> 위 단락에 이어질 본론 단락을 200∼350자로 작성하세요. ‘작품 속 장면 제시 → 장면의 의미 해석 → 작품에 대한 평가’의 순서를 따르세요. 특정 작품이 떠오르지 않으면 자신이 읽은 작품을 가정해도 됩니다.</p>
-        <label for="writing" class="sr">이어쓰기 답안</label><textarea id="writing" maxlength="500" placeholder="여기에 이어질 단락을 작성하세요."></textarea><div class="counter"><span id="count">0</span>자 / 권장 200∼350자</div>
-        <div class="checklist"><strong>제출 전 스스로 확인하세요.</strong><label><input type="checkbox" class="selfcheck"> 단락의 첫 문장에서 중심 내용을 제시했다.</label><label><input type="checkbox" class="selfcheck"> 작품 속 장면이나 내용을 근거로 사용했다.</label><label><input type="checkbox" class="selfcheck"> 근거를 나열하지 않고 의미를 해석했다.</label><label><input type="checkbox" class="selfcheck"> 마지막 문장이 작품에 대한 평가로 이어진다.</label></div>
-        <button class="action" onclick="finishPractice()">테스트 활동 완료</button><div id="wFeedback" class="feedback" aria-live="polite"></div>
-        <div class="nav"><button class="action secondary" onclick="showView('practice1')">이전 문제</button><button class="action" id="homeAfter" onclick="goHome()" disabled>메뉴로 돌아가기</button></div>
+        <div class="passage"><strong>앞 단락</strong><br>좋은 서평은 작품의 내용을 소개하는 데 그치지 않고, 작품이 독자에게 던지는 문제를 구체적으로 해석한다. 이를 위해서는
+          작품 속 인물의 행동이나 특정 장면을 근거로 선택하고, 그 근거가 자신의 평가와 어떻게 연결되는지를 설명해야 한다.</div>
+        <p><strong>과제:</strong> 위 단락에 이어질 본론 단락을 200∼350자로 작성하세요. ‘작품 속 장면 제시 → 장면의 의미 해석 → 작품에 대한 평가’의 순서를 따르세요. 특정 작품이
+          떠오르지 않으면 자신이 읽은 작품을 가정해도 됩니다.</p>
+        <label for="writing" class="sr">이어쓰기 답안</label><textarea id="writing" maxlength="500"
+          placeholder="여기에 이어질 단락을 작성하세요."></textarea>
+        <div class="counter"><span id="count">0</span>자 / 권장 200∼350자</div>
+        <div class="checklist"><strong>작성 전후에 스스로 확인하세요.</strong><label><input type="checkbox" class="selfcheck"> 단락의 첫
+            문장에서 중심 내용을 제시했다.</label><label><input type="checkbox" class="selfcheck"> 작품 속 장면이나 내용을 근거로
+            사용했다.</label><label><input type="checkbox" class="selfcheck"> 근거를 나열하지 않고 의미를 해석했다.</label><label><input
+              type="checkbox" class="selfcheck"> 마지막 문장이 작품에 대한 평가로 이어진다.</label></div>
+        <button class="action" id="completeWriting" onclick="finishPractice()">작성 완료 · 예시 보기</button>
+        <div id="wFeedback" class="feedback" aria-live="polite"></div>
+        <section id="modelAnswer" class="model" hidden aria-label="이어쓰기 예시와 구성 분석">
+          <h3>이어쓰기 예시: 황순원 「소나기」</h3>
+          <p class="help">하나의 가능한 예시입니다. 자신의 글과 작품이 달라도 문장의 역할을 비교해 보세요.</p>
+          <div class="passage">황순원의 「소나기」에서 소년과 소녀가 갑자기 내린 비를 피해 수숫단에 몸을 숨기는 장면은 두 인물의 관계가 가까워지는 순간을 보여 준다. 예상하지 못한 비
+            때문에 함께 머물게 된 두 사람은 말로 표현하지 못했던 호감을 행동과 태도로 드러낸다. 이때 소나기는 단순한 배경이 아니라 인물들의 마음이 드러나도록 사건을 움직이는 계기다. 이처럼 작품은 짧은
+            장면에 관계의 변화를 압축하여 독자가 소년과 소녀의 설렘을 자연스럽게 따라가게 한다. 그래서 이 장면은 첫사랑의 감정을 섬세하게 그려 낸다는 점에서 인상적이다.</div>
+          <strong>단락 구성 분석</strong>
+          <ol>
+            <li><strong>중심 내용과 근거:</strong> 첫 문장이 관계의 변화를 주장하면서 ‘비를 피해 수숫단에 숨는 장면’을 근거로 제시합니다.</li>
+            <li><strong>해석:</strong> 중간 문장들이 비의 역할과 인물의 행동이 갖는 의미를 설명합니다.</li>
+            <li><strong>평가:</strong> 마지막 문장이 앞선 해석을 바탕으로 작품의 표현 효과를 판단합니다.</li>
+          </ol>
+          <p class="help">내 글에도 ‘구체적 장면 → 그 의미 → 작품 평가’가 연결되는지 확인해 보세요. 예시 문장을 그대로 옮길 필요는 없습니다.</p>
+          <button class="action secondary" onclick="reviseWriting()">내 글 수정하고 다시 비교하기</button>
+        </section>
+        <div class="nav"><button class="action secondary" onclick="showView('practice1')">이전 문제</button><button
+            class="action" id="homeAfter" onclick="goHome()" disabled>메뉴로 돌아가기</button></div>
       </div>
     </section>
   </main>
   <footer class="footer">사전 설문은 연구자료로 수집되며, 테스트 활동 답안은 서버로 전송되지 않습니다.</footer>
   <script>
-    const CONFIG={PRE_SURVEY_URL:'https://forms.gle/WzBSV3Z5m43vAXWZ9'};
-    const surveyBtn=document.getElementById('surveyBtn');
-    surveyBtn.addEventListener('click',()=>{if(CONFIG.PRE_SURVEY_URL.startsWith('http')) location.href=CONFIG.PRE_SURVEY_URL; else alert('관리자가 사전 설문 주소를 아직 연결하지 않았습니다.');});
-    function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo({top:0,behavior:'smooth'});}
-    function goHome(){showView('home')}
-    function startPractice(){showView('practice1')}
-    function checkParagraph(){const a=document.querySelector('input[name=q1]:checked');const b=document.querySelector('input[name=q2]:checked');const c=document.getElementById('q3').value;const f=document.getElementById('pFeedback');if(!a||!b||!c){f.className='feedback show bad';f.textContent='세 문제에 모두 응답한 뒤 정답을 확인하세요.';return}const score=(a.value==='2')+(b.value==='3')+(c==='나-다-라-가');f.className='feedback show '+(score===3?'good':'bad');f.innerHTML=`3문제 중 ${score}문제를 맞혔습니다.<br><strong>해설:</strong> 주제문은 단락 전체를 포괄해야 합니다. 작품 근거를 다루는 단락에서 전자책에 관한 ③은 중심에서 벗어납니다. 세 번째 문제는 ‘주장→사례→해석→정리’ 순서가 자연스럽습니다.`;document.getElementById('toWriting').disabled=false;}
-    const writing=document.getElementById('writing');writing.addEventListener('input',()=>{document.getElementById('count').textContent=[...writing.value].length;localStorage.setItem('testWritingDraft',writing.value)});writing.value=localStorage.getItem('testWritingDraft')||'';document.getElementById('count').textContent=[...writing.value].length;
-    function finishPractice(){const len=[...writing.value.trim()].length;const checked=[...document.querySelectorAll('.selfcheck')].filter(x=>x.checked).length;const f=document.getElementById('wFeedback');if(len<200){f.className='feedback show bad';f.textContent=`현재 ${len}자입니다. 장면의 의미와 작품 평가를 보충하여 200자 이상 작성하세요.`;return}if(checked<4){f.className='feedback show bad';f.textContent='네 가지 점검 항목을 모두 확인한 뒤 완료하세요.';return}f.className='feedback show good';f.innerHTML='<strong>테스트 활동을 완료했습니다.</strong><br>본 활동에서도 근거를 제시한 뒤 그 의미를 해석하고 평가로 연결하게 됩니다.';document.getElementById('homeAfter').disabled=false;}
+    const CONFIG = { PRE_SURVEY_URL: 'https://forms.gle/WzBSV3Z5m43vAXWZ9' };
+    const surveyBtn = document.getElementById('surveyBtn');
+    surveyBtn.addEventListener('click', () => { if (CONFIG.PRE_SURVEY_URL.startsWith('http')) location.href = CONFIG.PRE_SURVEY_URL; else alert('관리자가 사전 설문 주소를 아직 연결하지 않았습니다.'); });
+    function showView(id) { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById(id).classList.add('active'); scrollTo({ top: 0, behavior: 'smooth' }); }
+    function goHome() { showView('home') }
+    function startPractice() { showView('practice1') }
+    function checkParagraph() { const a = document.querySelector('input[name=q1]:checked'); const b = document.querySelector('input[name=q2]:checked'); const c = document.getElementById('q3').value; const f = document.getElementById('pFeedback'); if (!a || !b || !c) { f.className = 'feedback show bad'; f.textContent = '세 문제에 모두 응답한 뒤 정답을 확인하세요.'; return } const score = (a.value === '2') + (b.value === '3') + (c === '나-다-라-가'); f.className = 'feedback show ' + (score === 3 ? 'good' : 'bad'); f.innerHTML = `3문제 중 ${score}문제를 맞혔습니다.<br><strong>해설:</strong> 주제문은 단락 전체를 포괄해야 합니다. 작품 근거를 다루는 단락에서 전자책에 관한 ③은 중심에서 벗어납니다. 세 번째 문제는 ‘주장→사례→해석→정리’ 순서가 자연스럽습니다.`; document.getElementById('toWriting').disabled = false; }
+    const writing = document.getElementById('writing'); writing.addEventListener('input', () => { document.getElementById('count').textContent = [...writing.value].length; localStorage.setItem('testWritingDraft', writing.value) }); writing.value = localStorage.getItem('testWritingDraft') || ''; document.getElementById('count').textContent = [...writing.value].length;
+    function finishPractice() { const len = [...writing.value.trim()].length; const f = document.getElementById('wFeedback'); if (len < 200) { f.className = 'feedback show bad'; f.textContent = `현재 ${len}자입니다. 장면의 의미와 작품 평가를 보충하여 200자 이상 작성하세요.`; return } writing.readOnly = true; document.getElementById('completeWriting').disabled = true; f.className = 'feedback show good'; f.textContent = '작성을 완료했습니다. 아래 예시를 읽고 자신의 단락과 비교해 보세요.'; const model = document.getElementById('modelAnswer'); model.hidden = false; document.getElementById('homeAfter').disabled = false; model.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    function reviseWriting() { writing.readOnly = false; document.getElementById('completeWriting').disabled = false; document.getElementById('modelAnswer').hidden = true; document.getElementById('homeAfter').disabled = true; const f = document.getElementById('wFeedback'); f.className = 'feedback'; f.textContent = ''; writing.focus(); }
   </script>
 </body>
+
 </html>
