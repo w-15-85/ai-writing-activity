@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#174a7e"><title>3주차 활동 | 갈등 구조와 의미 분석</title>
+<style>
+:root{--navy:#174a7e;--blue:#2878bd;--sky:#eaf5ff;--line:#d6e3ee;--text:#17212b;--muted:#617181;--green:#16815c;--red:#b43b34}
+*{box-sizing:border-box}body{margin:0;background:#f5f8fb;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;line-height:1.65}
+button,input,textarea,select{font:inherit}button{min-height:48px;cursor:pointer}.wrap{width:min(780px,100%);margin:auto}
+.top{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:24px 18px}.top h1{font-size:1.5rem;line-height:1.35;margin:5px 0}.top p{margin:0;opacity:.93}.eyebrow{font-size:.8rem;font-weight:800;letter-spacing:.08em}
+main{padding:14px 13px 42px}.toolbar{display:flex;gap:9px;align-items:center;margin-bottom:11px}.step-label{color:var(--navy);font-weight:900}.home{margin-left:auto}
+.home,.secondary{border:1px solid #bdd5e8;background:#edf5fc;color:var(--navy);border-radius:11px;padding:8px 13px;font-weight:800}
+.progress{height:10px;background:#e1e8ee;border-radius:99px;overflow:hidden;margin-bottom:14px}.bar{height:100%;background:var(--blue);transition:.25s}
+.panel{display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:0 5px 18px rgba(33,62,85,.07)}.panel.active{display:block}
+h2{font-size:1.25rem;line-height:1.4;margin:0 0 6px}h3{font-size:1.02rem;margin:20px 0 8px}.help{color:var(--muted);font-size:.92rem}
+.guide,.passage,.model,.tip{padding:14px;border-radius:11px;margin:12px 0}.guide{background:var(--sky);border:1px solid #c7e1f5}.passage{background:#f7fafc;border-left:4px solid #8db9dc}.model{background:#f0f8ff;border:1px solid #b8d8f1}.model[hidden]{display:none}.tip{background:#fff9e7;border:1px solid #eadca5}
+.question{border-top:1px solid var(--line);padding-top:17px;margin-top:18px}.question:first-of-type{border-top:0}.question-title{font-weight:800}
+.choice{display:block;border:1px solid var(--line);padding:11px 12px;border-radius:10px;margin:8px 0;background:#fff}.choice input{margin-right:8px;transform:scale(1.15)}
+.choice.correct{border:2px solid var(--green);background:#ecf9f2;color:#0f6244}.choice.wrong{border:2px solid var(--red);background:#fff0ee;color:#8e302a}
+.tag{float:right;border-radius:999px;padding:1px 8px;font-size:.78rem;font-weight:900;color:#fff}.correct .tag{background:var(--green)}.wrong .tag{background:var(--red)}
+.explain{margin:9px 0 15px;padding:11px 12px;border-radius:9px;background:#f5f8fb;border-left:4px solid var(--blue);font-size:.92rem}.explain strong{color:var(--navy)}
+textarea,input[type=text],select{width:100%;border:1px solid #aebfcd;border-radius:11px;padding:12px;font-size:16px}textarea{min-height:155px;line-height:1.7;resize:vertical}.short{min-height:105px}.counter{text-align:right;color:var(--muted);font-size:.84rem}
+.action{width:100%;border:0;border-radius:12px;background:var(--navy);color:#fff;font-weight:800;padding:11px 15px;margin-top:12px}.action:disabled{background:#e6eaee;color:#8a949d;cursor:not-allowed}
+.feedback{display:none;margin-top:12px;padding:12px;border-radius:10px}.feedback.show{display:block}.good{background:#e6f7ef;color:#126443}.bad{background:#fff0ec;color:#91332d}
+.nav{display:flex;gap:8px;margin-top:18px}.nav>*{flex:1}.draft-box{white-space:pre-wrap;background:#fff;border:1px dashed #91abc0;padding:12px;border-radius:10px}.danger{border-color:#e1b9b5;background:#fff5f4;color:#932f29}
+footer{text-align:center;color:#798692;font-size:.78rem;padding:20px 10px}ul{padding-left:22px}
+@media(max-width:500px){.panel{padding:16px}.nav{flex-direction:column}.toolbar{flex-wrap:wrap}.home{margin-left:0}.tag{float:none;display:inline-block;margin-left:7px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><div class="eyebrow">대학생 글쓰기 연구 · 3주차</div><h1>갈등 구조를 바탕으로 작품의 의미 분석하기</h1><p>김혜진 「TRS가 돌보고 있습니다」를 바탕으로 활동합니다.</p></div></header>
+<main class="wrap">
+  <div class="toolbar"><span class="step-label" id="stepLabel">1/6단계</span><button class="home" onclick="goHome()">⌂ 홈 화면</button></div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+
+  <section class="panel active" data-step="1">
+    <h2>1단계. 사건과 갈등 구별하기</h2>
+    <div class="guide"><label for="participantCode"><strong>참여 코드</strong></label><br><span class="help">사전 설문·2주차와 동일한 참여 코드를 입력하세요.</span><input id="participantCode" type="text" maxlength="30" class="persist" data-key="participantCode" autocomplete="off"></div>
+    <p class="help">사건은 작품에서 일어난 일이고, 갈등은 양립하기 어려운 욕구·책임·권리·가치가 충돌하는 구조입니다.</p>
+    <div id="quiz1"></div><button class="action" onclick="checkQuiz(1)">정답과 해설 확인</button><div id="f1" class="feedback"></div>
+    <div class="nav"><button class="secondary" onclick="goHome()">홈 화면</button><button class="action" id="next1" onclick="showStep(2)" disabled>다음 단계 →</button></div>
+  </section>
+
+  <section class="panel" data-step="2">
+    <h2>2단계. 작품의 세 가지 갈등축 찾기</h2>
+    <div class="guide">① 생명 연장 ↔ 삶의 질<br>② 보호자의 권리 ↔ 환자의 생명<br>③ 기계의 효율·감시 ↔ 인간의 관계·공감</div>
+    <div id="quiz2"></div><button class="action" onclick="checkQuiz(2)">정답과 해설 확인</button><div id="f2" class="feedback"></div>
+    <div class="nav"><button class="secondary" onclick="showStep(1)">← 이전 단계</button><button class="secondary" onclick="goHome()">홈 화면</button><button class="action" id="next2" onclick="showStep(3)" disabled>다음 단계 →</button></div>
+  </section>
+
+  <section class="panel" data-step="3">
+    <h2>3단계. 인물과 갈등 차원 연결하기</h2>
+    <div id="quiz3"></div><button class="action" onclick="checkQuiz(3)">정답과 해설 확인</button><div id="f3" class="feedback"></div>
+    <div class="nav"><button class="secondary" onclick="showStep(2)">← 이전 단계</button><button class="secondary" onclick="goHome()">홈 화면</button><button class="action" id="next3" onclick="showStep(4)" disabled>다음 단계 →</button></div>
+  </section>
+
+  <section class="panel" data-step="4">
+    <h2>4단계. 갈등의 전개 과정 분석하기</h2>
+    <div class="passage">가. TRS가 성한의 상태와 위험 가능성을 분석한다.<br>나. 환자를 보호하는 임무와 성한을 보호하는 임무가 충돌한다.<br>다. 장기간의 간병으로 성한의 삶이 소진된다.<br>라. TRS가 최 신부에게 판단의 문제를 제기한다.<br>마. TRS가 환자의 생명유지장치를 중단한다.<br>바. 선택의 결과로 결정 권한과 책임의 문제가 드러난다.</div>
+    <div id="quiz4"></div><button class="action" onclick="checkQuiz(4)">정답과 해설 확인</button><div id="f4" class="feedback"></div>
+    <div class="nav"><button class="secondary" onclick="showStep(3)">← 이전 단계</button><button class="secondary" onclick="goHome()">홈 화면</button><button class="action" id="next4" onclick="showStep(5)" disabled>다음 단계 →</button></div>
+  </section>
+
+  <section class="panel" data-step="5">
+    <h2>5단계. 비평 관점 적용하기</h2>
+    <div class="guide"><strong>관점 안내</strong><br>돌봄 윤리: 관계·배려·응답성·상호의존<br>생명윤리: 자율성·대리 결정·선행·악행 금지<br>기술철학: 기술의 비중립성·알고리즘·책임<br>감시사회: 데이터화·보호와 감시·판단 권력</div>
+    <div id="quiz5"></div>
+    <div class="question">
+      <div class="question-title">5. 다음 장면을 두 관점에서 각각 2문장 이상 해석하세요.</div>
+      <div class="passage">TRS는 장기간의 간병으로 소진된 성한의 신체 상태와 행동 변화를 지속적으로 관찰하고 데이터를 분석한다. 그 결과 어머니가 현재 상태로 계속 살아 있을 경우 성한이 극단적인 선택을 할 가능성이 95% 이상이라고 판단한다. TRS는 이 예측을 바탕으로 환자를 계속 돌보는 일이 오히려 보호자인 성한을 위험에 빠뜨릴 수 있다고 결론 내린다.</div>
+      <div class="tip"><strong>작성 팁</strong><ul><li><strong>돌봄 윤리:</strong> 누구의 고통에 응답했는가? 데이터만으로 관계와 의사를 충분히 이해했는가?</li><li><strong>감시사회:</strong> 어떤 정보가 수집되었는가? 보호 목적의 관찰이 언제 판단 권력으로 바뀌는가?</li><li>각 답에 ‘작품 속 행동 → 관점의 핵심 개념 → 장면의 의미’를 포함하세요.</li></ul></div>
+      <label for="careText"><strong>돌봄 윤리 관점</strong></label><textarea id="careText" class="short persist" data-key="careText" placeholder="2문장 이상 작성하세요."></textarea>
+      <label for="watchText"><strong>감시사회 관점</strong></label><textarea id="watchText" class="short persist" data-key="watchText" placeholder="2문장 이상 작성하세요."></textarea>
+      <div id="perspectiveExample" class="model" hidden><strong>비교 예시</strong><p><b>돌봄 윤리:</b> TRS가 성한의 위험을 발견한 것은 보호자의 고통에도 응답하려 했다는 점에서 돌봄의 범위를 확장한 행동이다. 그러나 그의 삶을 데이터와 위험 확률로만 판단하고 관계 속에서 의사를 확인하지 않았다는 점에서 관계적 돌봄의 한계를 드러낸다.</p><p><b>감시사회:</b> TRS의 분석은 성한의 위험을 미리 발견하여 보호하는 기능을 한다. 그러나 수집한 데이터로 미래 행동을 예측하고 그 예측을 다른 사람의 생명에 관한 결정으로 연결했다는 점에서 보호를 위한 감시가 판단 권력으로 확대되는 위험을 보여 준다.</p></div>
+    </div>
+    <button class="action" onclick="checkStep5()">정답·해설 및 비교 예시 확인</button><div id="f5" class="feedback"></div>
+    <div class="nav"><button class="secondary" onclick="showStep(4)">← 이전 단계</button><button class="secondary" onclick="goHome()">홈 화면</button><button class="action" id="next5" onclick="showStep(6)" disabled>다음 단계 →</button></div>
+  </section>
+
+  <section class="panel" data-step="6">
+    <h2>6단계. 갈등 구조와 의미를 분석하는 서평 단락 쓰기</h2>
+    <div class="guide"><strong>공통 논제</strong><br>작품에서 환자의 생명 유지와 보호자의 삶이 충돌하는 과정을 밝히고, 이 갈등이 돌봄을 개인·가족·기계에 맡긴 사회의 어떤 문제를 드러내는지 분석하세요.</div>
+    <p class="help">중심 문장, 충돌 가치, 작품 사건, TRS의 선택, 사회적·윤리적 의미, 작품 평가를 포함하세요. ‘나는 ~라고 생각한다’와 같은 자기 지시 표현은 사용하지 않습니다.</p>
+    <label for="draft"><strong>① 초고(400~550자)</strong></label><textarea id="draft" maxlength="800" class="persist counted" data-key="draft"></textarea><div class="counter"><span data-count="draft">0</span>자</div>
+    <button class="secondary" style="width:100%" onclick="copyPrompt()">AI 점검 요청문과 초고 복사</button>
+    <div class="passage" id="aiPrompt">다음 서평 단락을 대신 고쳐 쓰지 말고 갈등 분석의 구조만 점검해 줘. ① 충돌하는 주체와 가치가 분명한지, ② 작품 속 사건이 근거로 사용되었는지, ③ 사건을 요약한 뒤 갈등의 의미를 해석했는지, ④ 개인적 갈등을 사회적·윤리적 문제로 확장했는지 분석해 줘. 각 항목의 부족한 점을 설명하되 수정된 글 전체를 작성하지 마.</div>
+    <label for="aiFeedback"><strong>② AI가 적절하게 지적한 내용</strong></label><textarea id="aiFeedback" class="short persist" data-key="aiFeedback"></textarea>
+    <label for="aiError"><strong>③ AI가 작품이나 글의 의도를 잘못 이해한 내용</strong></label><textarea id="aiError" class="short persist" data-key="aiError"></textarea>
+    <label for="decision"><strong>④ 수용·불수용한 의견과 이유</strong></label><textarea id="decision" class="short persist" data-key="decision"></textarea>
+    <button class="secondary" onclick="showDraft()">내 초고 다시 보기</button><div id="draftView" class="draft-box" hidden></div>
+    <label for="finalText"><strong>⑤ 최종 수정본(450~600자)</strong></label><textarea id="finalText" maxlength="850" class="persist counted" data-key="finalText"></textarea><div class="counter"><span data-count="finalText">0</span>자</div>
+    <button class="action" id="finishBtn" onclick="finishActivity()">최종 답안 제출 · 예시와 분석 보기</button><div id="f6" class="feedback"></div>
+    <div id="modelAnswer" class="model" hidden><h3>예시 단락</h3><p>「TRS가 돌보고 있습니다」의 중심 갈등은 환자의 생명을 유지해야 한다는 책임과 간병으로 무너지는 보호자의 삶을 지켜야 한다는 책임의 충돌에서 발생한다. 성한은 오랜 간병으로 삶의 의지를 잃어 가고, TRS는 수집한 데이터를 바탕으로 그의 위험 가능성을 판단한다. 이 상황에서 TRS는 환자를 계속 돌보면 성한을 잃을 수 있고, 성한을 보호하려면 환자의 생명을 중단해야 하는 모순에 놓인다. 결국 생명유지장치를 중단한 것은 이러한 갈등에 대한 극단적인 선택이다. 그러나 이를 기계의 오류로만 규정하면 돌봄의 책임이 가족과 기술에 집중된 사회적 조건을 놓치게 된다. 작품은 돌봄을 신체 유지의 효율성으로 환원할 수 없으며, 보호자의 소진과 환자의 존엄을 함께 책임질 사회적 장치가 필요하다는 점을 드러낸다.</p><h3>구성 분석</h3><ul><li><b>중심 문장:</b> 환자의 생명과 보호자의 삶이 충돌함을 제시합니다.</li><li><b>작품 근거:</b> 성한의 소진과 TRS의 위험 분석을 사용합니다.</li><li><b>갈등 심화:</b> 두 보호 임무를 함께 수행할 수 없는 모순을 설명합니다.</li><li><b>의미 해석:</b> 기계의 오류를 넘어 돌봄 책임의 집중 문제로 확장합니다.</li><li><b>작품 평가:</b> 돌봄의 사회적 분담 필요성을 제시합니다.</li></ul><p class="help">이 글은 유일한 정답이 아니라 비교를 위한 예시입니다.</p></div>
+    <div class="nav"><button class="secondary" onclick="showStep(5)">← 이전 단계</button><button class="action" onclick="goHome()">홈 화면</button></div>
+    <button class="secondary danger" style="width:100%;margin-top:22px" onclick="clearSaved()">이 기기의 3주차 답안 초기화</button>
+  </section>
+</main>
+<footer>작성 중 답안은 현재 브라우저에 자동 저장되며, 최종 제출 시 연구용 스프레드시트로 전송됩니다.</footer>
+<iframe name="submitFrame" title="답안 제출" hidden></iframe>
+<script>
+const SUBMIT_URL='PASTE_WEEK3_APPS_SCRIPT_WEB_APP_URL_HERE';
+const STORE='aiWritingWeek3_v1_';
+const quizzes={
+1:[
+{q:'1. 다음 중 사건을 갈등 구조로 분석한 문장은?',o:['TRS는 병실에서 환자를 간병한다.','성한은 어머니를 오랫동안 간병한다.','TRS는 환자의 생명을 유지해야 하지만, 간병으로 무너지는 보호자의 생명도 지켜야 한다.','최 신부는 TRS와 대화를 나눈다.'],a:2,e:'사건의 나열을 넘어 동시에 수행하기 어려운 두 책임의 충돌을 제시합니다.'},
+{q:'2. 환자의 생명이 기술로 유지되는 동안 성한의 삶이 무너지는 상황에서 충돌하는 두 가치는?',o:['환자의 생명 유지 ↔ 보호자의 삶과 안전','의료기술의 발전 ↔ 병원의 경제적 이익','성한의 직업 ↔ TRS의 성능','환자의 회복 ↔ 최 신부의 신념'],a:0,e:'환자의 생명을 유지할 책임과 보호자의 삶을 지킬 책임이 충돌합니다.'}
+],
+2:[
+{q:'1. 생명은 계속 유지되지만 그 상태를 인간다운 삶으로 평가할 수 있는지는 분명하지 않다.',o:['생명 연장 ↔ 삶의 질','보호자의 권리 ↔ 환자의 생명','기계의 효율·감시 ↔ 인간의 관계·공감'],a:0,e:'기술적 생명 유지와 연장된 삶의 존엄·의미에 대한 평가가 충돌합니다.'},
+{q:'2. 보호자의 고통이 환자의 생명을 중단할 권한으로 이어질 수 있는지는 분명하지 않다.',o:['생명 연장 ↔ 삶의 질','보호자의 권리 ↔ 환자의 생명','기계의 효율·감시 ↔ 인간의 관계·공감'],a:1,e:'보호자의 안전과 환자의 생명권 사이에서 권리와 책임의 범위가 문제가 됩니다.'},
+{q:'3. TRS는 위험을 예측하지만 인간의 관계와 감정을 수치만으로 판단할 수 있는지는 의문이다.',o:['생명 연장 ↔ 삶의 질','보호자의 권리 ↔ 환자의 생명','기계의 효율·감시 ↔ 인간의 관계·공감'],a:2,e:'데이터 분석의 효율성과 관계·배려·맥락에 기초한 돌봄이 충돌합니다.'},
+{q:'4. 세 갈등축의 관계를 가장 적절하게 설명한 문장은?',o:['세 갈등은 서로 관계없이 나타난다.','모든 갈등은 TRS의 기계적 고장에서 발생한다.','환자의 생명, 보호자의 삶, 기술의 판단 권한이 중첩되어 복합적 갈등을 만든다.','갈등은 TRS와 성한의 감정적 다툼이다.'],a:2,e:'생명윤리, 보호자의 소진, 기술의 판단 권한이 서로 연결되어 있습니다.'}
+],
+3:[
+{q:'1-1. 성한에게 가장 직접적으로 나타나는 갈등 차원은?',o:['돌봄으로 소진되는 보호자의 개인적 갈등','효율과 윤리 사이의 기술적 갈등','생명 판단의 중재에 관한 윤리적 갈등'],a:0,e:'성한은 장기간의 간병으로 삶이 소진되는 보호자의 문제를 보여 줍니다.'},
+{q:'1-2. 할머니의 사례가 보여 주는 갈등 차원은?',o:['돌봄 책임이 개인에게 집중될 때 발생하는 개인적·사회적 갈등','알고리즘의 판단 정확성에 관한 기술적 갈등','종교적 신념과 의료 제도의 갈등'],a:0,e:'돌봄의 부담이 개인에게 집중될 때 보호자가 극단으로 내몰릴 수 있음을 보여 줍니다.'},
+{q:'1-3. TRS에게 가장 직접적으로 나타나는 갈등 차원은?',o:['보호자의 경제적 갈등','효율적 판단과 윤리적 판단이 충돌하는 기술적 갈등','가족 구성원 사이의 감정적 갈등'],a:1,e:'TRS는 데이터에 따른 효율과 생명에 대한 윤리 사이에서 판단해야 합니다.'},
+{q:'1-4. 최 신부의 기능으로 가장 적절한 것은?',o:['생명에 관한 판단의 주체와 책임을 묻는 윤리적 매개자','환자의 상태를 진단하는 의료 전문가','TRS의 성능을 평가하는 기술 관리자'],a:0,e:'최 신부는 누가 어떤 기준으로 생명을 판단할 수 있는지 묻는 매개자입니다.'},
+{q:'2. TRS와 최 신부의 대화가 갖는 의미로 가장 적절한 것은?',o:['TRS가 인간의 윤리 판단을 따름으로써 기계적 판단의 한계를 보완하는 과정이다.','TRS가 선택의 승인을 얻어 책임을 최 신부에게 넘기려는 과정이다.','데이터에 근거한 보호 판단과 생명을 해쳐서는 안 된다는 원칙이 충돌하며 결정 주체와 책임 문제를 드러내는 과정이다.','환자보다 보호자 안전을 우선해야 한다는 결론을 함께 확인하는 과정이다.'],a:2,e:'두 판단의 충돌은 생명 결정의 기준·주체·책임을 드러냅니다. ①은 최 신부의 판단을 최종적으로 따르지 않는다는 점, ②는 대화의 핵심을 책임 회피로 축소한다는 점, ④는 두 존재가 합의하지 않는다는 점에서 적절하지 않습니다.'}
+],
+4:[
+{q:'1. 갈등 전개 순서로 가장 적절한 것은?',o:['다 → 가 → 나 → 라 → 마 → 바','가 → 다 → 라 → 나 → 바 → 마','다 → 나 → 가 → 마 → 라 → 바','가 → 나 → 다 → 라 → 마 → 바'],a:0,e:'갈등의 배경 → 위험 분석 → 임무 충돌 → 윤리적 검토 → 선택 → 책임 문제의 순서입니다.'},
+{q:'2. 작품의 갈등을 지나치게 단순화한 설명은?',o:['TRS는 환자와 보호자를 동시에 지키기 어려운 상황에 놓인다.','TRS의 선택은 돌봄 책임과 생명 결정 권한의 충돌을 드러낸다.','TRS는 성한을 좋아했기 때문에 환자의 생명유지장치를 중단한다.','TRS의 판단에는 효율성과 생명윤리가 충돌한다.'],a:2,e:'TRS의 행동을 개인적 호감만으로 설명하면 임무 충돌, 위험 분석, 생명윤리, 돌봄 책임의 복합성이 사라집니다.'}
+],
+5:[
+{q:'1. 신체는 안정적으로 관리하지만 환자와 보호자의 관계까지 회복하지는 못한다는 해석의 관점은?',o:['돌봄 윤리','생명윤리','기술철학','감시사회'],a:0,e:'돌봄 윤리는 신체 유지뿐 아니라 관계·감정·응답성을 돌봄의 질로 평가합니다.'},
+{q:'2. 의사 표현이 불가능한 환자의 생명을 누가 대신 결정할 수 있는지 묻는 관점은?',o:['돌봄 윤리','생명윤리','기술철학','감시사회'],a:1,e:'환자의 자율성, 대리 결정, 선행과 악행 금지가 생명윤리의 핵심 쟁점입니다.'},
+{q:'3. 기술에 생명 판단 권한을 어디까지 허용할 것인지 묻는 관점은?',o:['돌봄 윤리','생명윤리','기술철학','감시사회'],a:2,e:'기술의 비중립성, 판단 범위, 결과에 대한 책임을 묻는 기술철학적 해석입니다.'},
+{q:'4. 보호 목적의 데이터 수집이 판단 권력으로 확대되는 위험을 묻는 관점은?',o:['돌봄 윤리','생명윤리','기술철학','감시사회'],a:3,e:'보호와 감시의 경계, 데이터화와 통제 권력이 감시사회 관점의 쟁점입니다.'}
+]};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function save(k,v){localStorage.setItem(STORE+k,v)}function load(k){return localStorage.getItem(STORE+k)}
+function render(){Object.entries(quizzes).forEach(([step,items])=>{const root=$('#quiz'+step);root.innerHTML=items.map((x,i)=>`<div class="question" data-q="${step}_${i}"><div class="question-title">${x.q}</div>${x.o.map((o,j)=>`<label class="choice"><input type="radio" name="q${step}_${i}" value="${j}">${o}</label>`).join('')}</div>`).join('')})}
+function showStep(n){$$('.panel').forEach(p=>p.classList.toggle('active',+p.dataset.step===n));$('#stepLabel').textContent=n+'/6단계';$('#bar').style.width=(n/6*100)+'%';save('step',n);scrollTo({top:0,behavior:'smooth'})}
+function goHome(){location.href='index.html'}
+function feedback(id,ok,msg){const f=$(id);f.className='feedback show '+(ok?'good':'bad');f.innerHTML=msg}
+function radio(name){return document.querySelector('input[name="'+name+'"]:checked')}
+function clearMarks(step){const p=document.querySelector('[data-step="'+step+'"]');p.querySelectorAll('.correct,.wrong').forEach(x=>x.classList.remove('correct','wrong'));p.querySelectorAll('.tag,.explain').forEach(x=>x.remove())}
+function markItem(step,i,item){const input=radio('q'+step+'_'+i),ok=+input.value===item.a,label=input.closest('.choice'),box=input.closest('.question');label.classList.add(ok?'correct':'wrong');const tag=document.createElement('span');tag.className='tag';tag.textContent=ok?'정답':'오답';label.appendChild(tag);const note=document.createElement('div');note.className='explain';note.innerHTML='<strong>해설:</strong> '+item.e;box.appendChild(note);return ok}
+function checkQuiz(step){if(step===1&&$('#participantCode').value.trim().length<2){feedback('#f1',false,'사전 설문·2주차와 동일한 참여 코드를 입력하세요.');return}const items=quizzes[step];if(items.some((_,i)=>!radio('q'+step+'_'+i))){feedback('#f'+step,false,'모든 문항에 응답한 뒤 확인하세요.');return}clearMarks(step);const score=items.filter((x,i)=>markItem(step,i,x)).length;feedback('#f'+step,score===items.length,`${items.length}문항 중 ${score}문항을 맞혔습니다. 각 문항의 해설을 확인하세요.`);$('#next'+step).disabled=false;save('done'+step,'1')}
+function checkStep5(){const items=quizzes[5];if(items.some((_,i)=>!radio('q5_'+i))){feedback('#f5',false,'선택형 네 문항에 모두 응답하세요.');return}if($('#careText').value.trim().length<60||$('#watchText').value.trim().length<60){feedback('#f5',false,'두 관점의 해석을 각각 2문장, 60자 이상 작성하세요.');return}clearMarks(5);const score=items.filter((x,i)=>markItem(5,i,x)).length;$('#perspectiveExample').hidden=false;feedback('#f5',score===items.length,`선택형 ${items.length}문항 중 ${score}문항을 맞혔습니다. 서술형은 자동으로 정오 판정하지 않으므로 비교 예시와 작성 기준을 확인하세요.`);$('#next5').disabled=false;save('done5','1')}
+async function copyPrompt(){const text=$('#aiPrompt').textContent.trim()+'\n\n[나의 초고]\n'+$('#draft').value;try{await navigator.clipboard.writeText(text);alert('AI 점검 요청문과 초고를 복사했습니다.')}catch(e){alert('자동 복사가 되지 않았습니다. 직접 선택하여 복사하세요.')}}
+function showDraft(){const v=$('#draftView');v.textContent=$('#draft').value||'저장된 초고가 없습니다.';v.hidden=!v.hidden}
+function finishActivity(){const d=[...$('#draft').value.trim()].length,f=[...$('#finalText').value.trim()].length;if(d<400){feedback('#f6',false,`초고가 현재 ${d}자입니다. 400자 이상 작성하세요.`);return}if($('#aiFeedback').value.trim().length<20||$('#aiError').value.trim().length<10||$('#decision').value.trim().length<20){feedback('#f6',false,'AI 점검 기록 세 항목을 모두 구체적으로 작성하세요. 잘못 이해한 내용이 없다면 그 사실과 판단 이유를 적으세요.');return}if(f<450){feedback('#f6',false,`최종 수정본이 현재 ${f}자입니다. 450자 이상 작성하세요.`);return}if(!SUBMIT_URL.startsWith('https://script.google.com/')){feedback('#f6',false,'관리자가 제출 주소를 아직 연결하지 않았습니다.');return}if(!confirm('최종 답안을 제출하면 예시가 공개됩니다. 제출할까요?'))return;$('#finishBtn').disabled=true;feedback('#f6',true,'답안을 전송하고 있습니다.');const answers={};Object.values(quizzes).flat().forEach((_,idx)=>{});Object.entries(quizzes).forEach(([s,items])=>items.forEach((_,i)=>answers['q'+s+'_'+i]=radio('q'+s+'_'+i)?.value||''));const data={submissionId:load('submissionId')||((crypto.randomUUID&&crypto.randomUUID())||Date.now()+'-'+Math.random()),participantCode:$('#participantCode').value.trim(),objectiveAnswers:JSON.stringify(answers),careText:$('#careText').value,watchText:$('#watchText').value,draft:$('#draft').value,aiFeedback:$('#aiFeedback').value,aiError:$('#aiError').value,decision:$('#decision').value,finalText:$('#finalText').value,clientTime:new Date().toISOString()};save('submissionId',data.submissionId);const form=document.createElement('form');form.method='POST';form.action=SUBMIT_URL;form.target='submitFrame';Object.entries(data).forEach(([k,v])=>{const input=document.createElement('input');input.type='hidden';input.name=k;input.value=v;form.appendChild(input)});document.body.appendChild(form);form.submit();form.remove();setTimeout(()=>revealModel('제출 요청을 완료했습니다. 자신의 글과 예시를 비교하세요.'),1200)}
+function revealModel(msg){$('#finalText').readOnly=true;$('#finishBtn').disabled=true;$('#modelAnswer').hidden=false;feedback('#f6',true,msg);save('completed','1');$('#modelAnswer').scrollIntoView({behavior:'smooth',block:'start'})}
+function clearSaved(){if(!confirm('이 기기에 저장된 3주차 답안을 모두 삭제할까요?'))return;Object.keys(localStorage).filter(k=>k.startsWith(STORE)).forEach(k=>localStorage.removeItem(k));location.reload()}
+function restore(){render();$$('.persist').forEach(el=>{const v=load(el.dataset.key);if(v!==null)el.value=v;el.addEventListener('input',()=>{save(el.dataset.key,el.value);counts()})});$$('input[type=radio]').forEach(el=>{const k='radio_'+el.name;if(load(k)===el.value)el.checked=true;el.addEventListener('change',()=>save(k,el.value))});[1,2,3,4,5].forEach(n=>{if(load('done'+n)==='1')$('#next'+n).disabled=false});if(load('done5')==='1')$('#perspectiveExample').hidden=false;if(load('completed')==='1'){$('#finalText').readOnly=true;$('#finishBtn').disabled=true;$('#modelAnswer').hidden=false;feedback('#f6',true,'이 기기에 저장된 완료 답안을 불러왔습니다.')}counts();showStep(Math.min(6,Math.max(1,+(load('step')||1))))}
+function counts(){$$('.counted').forEach(el=>{const t=document.querySelector('[data-count="'+el.id+'"]');if(t)t.textContent=[...el.value].length})}
+restore();
+</script>
+</body></html>
